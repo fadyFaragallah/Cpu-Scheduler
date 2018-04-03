@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <top>
+      <HBox style="-fx-background-color: #1d1f27;" BorderPane.alignment="CENTER">
+         <children>
+            <Label style="-fx-background-color: #1d1f27; -fx-text-fill: white; -fx-font-size: 14;" text="CPU SCHEDULER" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#EXIT" style="-fx-background-color: #1d1f27; -fx-text-fill: white; -fx-font-size: 11;" text="X" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </top>
+   <left>
+      <VBox style="-fx-background-color: #ff5733;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="55.0" prefWidth="237.0" style="-fx-font-size: 20; -fx-background-color: #ff5733; -fx-line-spacing: 5; -fx-text-alignment: center;" text="Scheduling Algorithm" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#CALC_FIFO" prefHeight="64.0" prefWidth="239.0" style="-fx-background-color: #ff5733; -fx-font-size: 15; -fx-text-fill: white;" text="                       FIFO                       " VBox.vgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#CALC_FSJ_NP" prefHeight="60.0" prefWidth="239.0" style="-fx-background-color: #ff5733; -fx-font-size: 15; -fx-text-fill: white;" text="                    FSJ NP                      " VBox.vgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#CALC_FSJ_P" prefHeight="71.0" prefWidth="239.0" style="-fx-background-color: #ff5733; -fx-font-size: 15; -fx-text-fill: white;" text="                      FSJ P                       " VBox.vgrow="ALWAYS" />
+            <Button layoutX="10.0" layoutY="174.0" mnemonicParsing="false" onAction="#CALC_P_NP" prefHeight="71.0" prefWidth="239.0" style="-fx-background-color: #ff5733; -fx-font-size: 15; -fx-text-fill: white;" text="                PRIORITY NP                " />
+            <Button layoutX="10.0" layoutY="260.0" mnemonicParsing="false" onAction="#CALC_P_P" prefHeight="71.0" prefWidth="239.0" style="-fx-background-color: #ff5733; -fx-font-size: 15; -fx-text-fill: white;" text="                 PRIORITY P                  " />
+            <Button mnemonicParsing="false" onAction="#CALC_RR" prefHeight="66.0" prefWidth="239.0" style="-fx-background-color: #ff5733; -fx-font-size: 15; -fx-text-fill: white;" text="                        RR                        " VBox.vgrow="ALWAYS" />
+            <TextField fx:id="RR_Q" prefHeight="31.0" prefWidth="71.0" promptText="Quantum" style="-fx-background-color: #ff5733; -fx-alignment: CENTER;" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox style="-fx-background-color: #333745;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox spacing="5.0" style="-fx-background-color: #333745;">
+               <children>
+                  <TextField fx:id="P_ID" promptText="Process id" style="-fx-background-color: #333745; -fx-border-color: #1d1f27;-fx-text-fill: white;" />
+                  <TextField fx:id="P_ARRIVE" promptText="Process Arrival Time" style="-fx-background-color: #333745; -fx-border-color: #1d1f27;-fx-text-fill: white;" />
+                  <TextField fx:id="P_BURST" promptText="Process Burst Time" style="-fx-background-color: #333745; -fx-border-color: #1d1f27; -fx-text-fill: white;" />
+                  <TextField fx:id="P_P" promptText="Priority" style="-fx-background-color: #333745; -fx-border-color: #1d1f27; -fx-text-fill: white;" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button id="ADD_P" mnemonicParsing="false" onAction="#ADD_PROCESS" style="-fx-background-color: #1d1f27; -fx-text-fill: white;" text="Add" />
+                  <Button id="DELETE_P" layoutX="626.0" layoutY="10.0" mnemonicParsing="false" onAction="#DELETE_PROCESS" style="-fx-background-color: #1d1f27; -fx-text-fill: white;" text="Delete" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </VBox.margin>
+            </HBox>
+            <TableView fx:id="MainTable" prefHeight="458.0" prefWidth="731.0">
+              <columns>
+                <TableColumn fx:id="idCol" onEditCommit="#changeCell_ID" prefWidth="75.0" text="Process id" />
+                <TableColumn fx:id="arrivalCol" onEditCommit="#changeCell_ARRIVE" prefWidth="75.0" text="Process Arrival Time" />
+                  <TableColumn fx:id="burstCol" onEditCommit="#changeCell_BURST" prefWidth="75.0" text="Process Burst Time" />
+                  <TableColumn fx:id="priorityCol" onEditCommit="#changeCell_P" prefWidth="75.0" text="Priority" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <VBox fx:id="GANTT" BorderPane.alignment="CENTER">
+         <padding><Insets bottom="10" left="10" right="10" top="10" /></padding>
+         <children>
+            <TextArea fx:id="instructions" editable="false" style="-fx-wrap-text: TRUE;" text="1 - fill in the table&#10;2 - choose the scheduling algorithm&#10;3 - the gantt chart will be drawn here and the ATAT and the AWT will be calculated" />
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>
